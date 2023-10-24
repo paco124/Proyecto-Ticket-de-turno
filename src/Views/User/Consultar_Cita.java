@@ -166,7 +166,7 @@ public class Consultar_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_btnConsultarMouseExited
 
     private void btnConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseClicked
-        if(true){
+        if(validarCurp()){
             controller.SelectCita(txtCurp.getText().trim());
         }
     }//GEN-LAST:event_btnConsultarMouseClicked

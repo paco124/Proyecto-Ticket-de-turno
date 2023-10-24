@@ -72,6 +72,7 @@ public class ControllerAdmin {
             preparedStatement.setString(1, status);
             preparedStatement.setString(2, curp);
             preparedStatement.execute();
+            JOptionPane.showMessageDialog(null, "Estatus Actualizada");
         } catch (SQLException e) {
             e.printStackTrace();
         }

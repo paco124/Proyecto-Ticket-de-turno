@@ -140,6 +140,7 @@ public class Delete_Cita extends javax.swing.JPanel {
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         if(validarCurp()){
             controller.DeleteCita(txtCurp.getText().trim());
+            Clear();
         }
     }//GEN-LAST:event_btnEliminarMouseClicked
     private boolean validarCurp() {

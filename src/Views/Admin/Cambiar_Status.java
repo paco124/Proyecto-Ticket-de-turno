@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Views.Admin;
 
 import Controllers.Admin.ControllerAdmin;
 import java.awt.Color;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class Cambiar_Status extends javax.swing.JPanel {
@@ -130,7 +128,7 @@ public class Cambiar_Status extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        if(true){
+        if(validarCurp() && validarButtonGroup()){
             String vigente = "";
             if (jRadioButton1.isSelected()) {
                 vigente = "RESUELTO";
@@ -140,7 +138,7 @@ public class Cambiar_Status extends javax.swing.JPanel {
             controller.UpdateStatusCita(vigente, txtCurp.getText().trim());
         }
     }//GEN-LAST:event_btnModificarMouseClicked
-    private boolean validarBottonGroup(){
+    private boolean validarButtonGroup(){
         if (buttonGroup1.getSelection() != null){
             return true;
         }else{
@@ -148,6 +146,23 @@ public class Cambiar_Status extends javax.swing.JPanel {
             return false;
         }
         
+    }
+    private boolean validarCurp() {
+        String texto = txtCurp.getText().trim();
+        if (texto != null) {
+            String regex = "^[A-Z]{1}[AEIOU]{1}[A-Z]{1}[A-Z]{1}\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])[HM]{1}[A-Z]{2}[A-Z0-9]{3}$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(texto);
+            if (matcher.matches()) {
+                JOptionPane.showMessageDialog(null, "El curp es incorrecto");
+                return false;
+            }
+            return matcher.matches();
+        } else {
+            JOptionPane.showMessageDialog(null, "LLenar el campo de curp");
+            return false;
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

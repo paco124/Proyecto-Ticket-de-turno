@@ -18,8 +18,7 @@ public class ControllerUser {
     public void InsertCita(MAgendar agendar) {
         try {
             Connection conexion = ConnectionDataBase.getConnection();
-            String sql = "INSERT INTO CITAS ( CURP, NOMBRE, PATERNO, MATERNO, TELEFONO, NIVEL, MUNICIPIO, ASUNTO) VALUES"
-                    + " (?, ?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO CITAS (CURP, NOMBRE, PATERNO, MATERNO, TELEFONO, NIVEL, MUNICIPIO, ASUNTO,STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?,'PENDIENTE')";
             PreparedStatement preparedStatement = conexion.prepareStatement(sql);
             preparedStatement.setString(1, agendar.getCurp());
             preparedStatement.setString(2, agendar.getNombre());
@@ -40,9 +39,7 @@ public class ControllerUser {
     public void UpdateCita(ModificarCita agendar) {
         try {
             Connection conexion = ConnectionDataBase.getConnection();
-            String sql = "UPDATE CITAS SET CURP = ?, NOMBRE = ?, PATERNO = ?,"
-                    + "MATERNO = ?, TELEFONO = ?, NIVEL = ?, MUNICIPIO =? "
-                    + "ASUNTO = ? WHERE CURP = ?";
+            String sql = "UPDATE CITAS SET CURP = ?, NOMBRE = ?, PATERNO = ?,MATERNO = ?, TELEFONO = ?, NIVEL = ?, MUNICIPIO =?, ASUNTO = ? WHERE CURP = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(sql);
             preparedStatement.setString(1, agendar.getCurp());
             preparedStatement.setString(2, agendar.getNombre());

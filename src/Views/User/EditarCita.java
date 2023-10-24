@@ -424,7 +424,7 @@ public class EditarCita extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarMouseExited
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        if(true){
+        if(validarCurp()){
             GetCita cita =controller.SelectCita(txtCurp.getText().trim());
             if(cita != null){
                 txtNombre.setText(cita.getNombre());
@@ -443,7 +443,7 @@ public class EditarCita extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLimpiarMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
-        if(true){
+        if(validarForm()){
             ModificarCita cita = new ModificarCita(txtCurp.getText(),txtNombre.getText(), 
                     txtPaterno.getText(), txtMaterno.getText(),
                     Integer.parseInt(txtTelefono.getText()),
