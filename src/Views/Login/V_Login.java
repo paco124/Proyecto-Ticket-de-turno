@@ -1,18 +1,27 @@
 package Views.Login;
 
+import Connection.ConnectionDataBase;
+import Controllers.Login.Controller_Login;
+import Views.Admin.PrincipalViewAdmin;
+import Views.User.PrincipalView;
+import Models.Login.*;
 import java.awt.Color;
-
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class V_Login extends javax.swing.JFrame {
 
-    int xMouse,yMouse;
+    int xMouse, yMouse;
     Color bg, bgButton;
-    
+    Controller_Login login = new Controller_Login();
+
     public V_Login() {
         initComponents();
-        //String.valueOf(txtContraseña.getPassword());
+        //
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -53,7 +62,7 @@ public class V_Login extends javax.swing.JFrame {
                 jLabel2MousePressed(evt);
             }
         });
-        pnlPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 40));
+        pnlPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 40));
 
         pnlImagen.setBackground(new java.awt.Color(255, 255, 255));
         pnlImagen.setPreferredSize(new java.awt.Dimension(380, 650));
@@ -88,7 +97,6 @@ public class V_Login extends javax.swing.JFrame {
 
         txtUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtUsuario.setText("Ingrese su usuario");
         txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 txtUsuarioMousePressed(evt);
@@ -116,6 +124,9 @@ public class V_Login extends javax.swing.JFrame {
         lblEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblEntrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEntrarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblEntrarMouseEntered(evt);
             }
@@ -247,6 +258,12 @@ public class V_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+        Connection conexion = ConnectionDataBase.getConnection();
+        try {
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V_Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.exit(0);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
@@ -258,11 +275,11 @@ public class V_Login extends javax.swing.JFrame {
     private void jLabel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        this.setLocation(x -xMouse, y - yMouse);
+        this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jLabel2MouseDragged
 
     private void lblCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseEntered
-        bg =pnlCerrar.getBackground();
+        bg = pnlCerrar.getBackground();
         pnlCerrar.setBackground(Color.red);
     }//GEN-LAST:event_lblCerrarMouseEntered
 
@@ -280,11 +297,55 @@ public class V_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_lblEntrarMouseExited
 
     private void txtUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMousePressed
-        if(txtUsuario.getText().equals("Ingrese su usuario")){
+        if (txtUsuario.getText().equals("Ingrese su usuario")) {
             txtUsuario.setText("");
         }
     }//GEN-LAST:event_txtUsuarioMousePressed
 
+    private void lblEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEntrarMouseClicked
+        if (validarForm()) {
+            ConsultarUser modelUser = new ConsultarUser(txtUsuario.getText(), String.valueOf(txtContraseña.getPassword()));
+            GetUser user = login.getUser(modelUser);
+            if (user != null) {
+                if (user.getRoleId() == 0) {
+                    dispose();
+                    PrincipalView user_view = new PrincipalView();
+                    user_view.setVisible(true);
+                }
+                if (user.getRoleId() == 1) {
+                    dispose();
+                    PrincipalViewAdmin admin_view = new PrincipalViewAdmin();
+                    admin_view.setVisible(true);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_lblEntrarMouseClicked
+    private boolean validarForm(){
+        if(validarUser() && validarPass()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    private boolean validarUser(){
+        String texto = txtUsuario.getText().trim();
+        if (texto != null) {
+            return true;
+        }else{
+            JOptionPane.showMessageDialog(null, "El campo Usuario esta vacio");
+            return false;
+        } 
+    }
+    private boolean validarPass(){
+        String texto = String.valueOf(txtContraseña.getPassword());
+        if (texto != null) {
+            return true;
+        }else{
+            JOptionPane.showMessageDialog(null, "El campo Usuario esta vacio");
+            return false;
+        } 
+    }
     /**
      * @param args the command line arguments
      */
