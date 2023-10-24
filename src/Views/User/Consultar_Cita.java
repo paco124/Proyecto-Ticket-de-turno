@@ -1,9 +1,14 @@
 package Views.User;
 
+import Controllers.User.ControllerUser;
 import java.awt.Color;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 public class Consultar_Cita extends javax.swing.JPanel {
-    Color bg;
+    Color bg = new Color(2,111,136);
+    ControllerUser controller = new ControllerUser();
     public Consultar_Cita() {
         initComponents();
     }
@@ -33,7 +38,6 @@ public class Consultar_Cita extends javax.swing.JPanel {
 
         txtCurp.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         txtCurp.setForeground(new java.awt.Color(204, 204, 204));
-        txtCurp.setText("Ingresar Curp");
         txtCurp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCurpActionPerformed(evt);
@@ -47,6 +51,9 @@ public class Consultar_Cita extends javax.swing.JPanel {
         btnConsultar.setText("  CONSULTAR");
         btnConsultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConsultarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnConsultarMouseEntered(evt);
             }
@@ -147,17 +154,41 @@ public class Consultar_Cita extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCurpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCurpActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtCurpActionPerformed
 
     private void btnConsultarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseEntered
-        // TODO add your handling code here:
+        pnlConsultar.setBackground(Color.black);
     }//GEN-LAST:event_btnConsultarMouseEntered
 
     private void btnConsultarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseExited
-        // TODO add your handling code here:
+        pnlConsultar.setBackground(bg);
     }//GEN-LAST:event_btnConsultarMouseExited
 
+    private void btnConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseClicked
+        if(true){
+            controller.SelectCita(txtCurp.getText().trim());
+        }
+    }//GEN-LAST:event_btnConsultarMouseClicked
+    private boolean validarCurp(){
+        String texto = txtCurp.getText().trim();
+        if (texto != null) {
+            String regex = "^[A-Z]{1}[AEIOU]{1}[A-Z]{1}[A-Z]{1}\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])[HM]{1}[A-Z]{2}[A-Z0-9]{3}$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(texto);
+            if(matcher.matches()){
+                JOptionPane.showMessageDialog(null, "El curp es incorrecto");
+                return false;
+            }
+            return matcher.matches();
+        }else{
+            JOptionPane.showMessageDialog(null, "LLenar el campo de curp");
+            return false;
+        }
+    }
+    public void Clear(){
+        txtCurp.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnConsultar;

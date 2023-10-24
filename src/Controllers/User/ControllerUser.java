@@ -18,8 +18,8 @@ public class ControllerUser {
     public void InsertCita(MAgendar agendar) {
         try {
             Connection conexion = ConnectionDataBase.getConnection();
-            String sql = "INSERT INTO CITAS ( CURP, NOMBRE, PATERNO, MATERNO, TELEFONO, NIVEL, MUNICIPIO, ASUNTO,STATUS) VALUES"
-                    + " (?, ?, ?, ?, ?, ?, ?, ?,'PENDIENTE');";
+            String sql = "INSERT INTO CITAS ( CURP, NOMBRE, PATERNO, MATERNO, TELEFONO, NIVEL, MUNICIPIO, ASUNTO) VALUES"
+                    + " (?, ?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement preparedStatement = conexion.prepareStatement(sql);
             preparedStatement.setString(1, agendar.getCurp());
             preparedStatement.setString(2, agendar.getNombre());
@@ -107,11 +107,10 @@ public class ControllerUser {
     }
 
     public GetCita SelectCita(String curp) {
-        GetCita cita;
+        GetCita cita = null;
         try {
             Connection conexion = ConnectionDataBase.getConnection();
-            String sql = "SELECT  CURP, NOMBRE, PATERNO, MATERNO, TELEFONO,"
-                    + " NIVEL, MUNICIPIO, ASUNTO, STATUS FROM citas WHERE CURP = ?";
+            String sql = "SELECT CURP, NOMBRE, PATERNO, MATERNO, TELEFONO, NIVEL, MUNICIPIO, ASUNTO, STATUS FROM citas WHERE CURP = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(sql);
             preparedStatement.setString(1, curp);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -129,11 +128,12 @@ public class ControllerUser {
 
                 cita = new GetCita(curpr, nombre, paterno, materno, telefono, nivel, municipio, asunto, status);
             } else {
-                // Manejar el caso en el que no se encuentra ningún registro
-                cita = null; // O realiza otra acción adecuada
+                cita = null;
             }
+
             resultSet.close();
             preparedStatement.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

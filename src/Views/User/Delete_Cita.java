@@ -36,7 +36,6 @@ public class Delete_Cita extends javax.swing.JPanel {
         lblCurp.setText("CURP:");
 
         txtCurp.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtCurp.setForeground(new java.awt.Color(204, 204, 204));
         txtCurp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCurpActionPerformed(evt);

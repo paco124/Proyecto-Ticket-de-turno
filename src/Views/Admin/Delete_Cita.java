@@ -1,7 +1,15 @@
 package Views.Admin;
 
+import Controllers.Admin.ControllerAdmin;
+import java.awt.Color;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 public class Delete_Cita extends javax.swing.JPanel {
+
+    Color bg = new Color(2, 111, 136);
+    ControllerAdmin controller = new ControllerAdmin();
 
     public Delete_Cita() {
         initComponents();
@@ -16,7 +24,6 @@ public class Delete_Cita extends javax.swing.JPanel {
         lblCurp = new javax.swing.JLabel();
         txtCurp = new javax.swing.JTextField();
         lblTitulo = new javax.swing.JLabel();
-        btnEliminar = new javax.swing.JLabel();
         pnlEliminar = new javax.swing.JPanel();
         btnEliminar1 = new javax.swing.JLabel();
 
@@ -44,8 +51,6 @@ public class Delete_Cita extends javax.swing.JPanel {
         add(lblCurp, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 127, 81, 25));
 
         txtCurp.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtCurp.setForeground(new java.awt.Color(204, 204, 204));
-        txtCurp.setText("Ingresar Curp");
         txtCurp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCurpActionPerformed(evt);
@@ -58,20 +63,6 @@ public class Delete_Cita extends javax.swing.JPanel {
         lblTitulo.setText("Eliminar cita");
         add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 46, 282, 46));
 
-        btnEliminar.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("    ELIMINAR");
-        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEliminarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEliminarMouseExited(evt);
-            }
-        });
-        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 307, 157, 48));
-
         pnlEliminar.setBackground(new java.awt.Color(2, 111, 136));
 
         btnEliminar1.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
@@ -79,6 +70,9 @@ public class Delete_Cita extends javax.swing.JPanel {
         btnEliminar1.setText("    ELIMINAR");
         btnEliminar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminar1MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnEliminar1MouseEntered(evt);
             }
@@ -105,25 +99,42 @@ public class Delete_Cita extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtCurpActionPerformed
 
-    private void btnEliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseEntered
-
-    }//GEN-LAST:event_btnEliminarMouseEntered
-
-    private void btnEliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseExited
-
-    }//GEN-LAST:event_btnEliminarMouseExited
-
     private void btnEliminar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseEntered
-
+        pnlEliminar.setBackground(Color.black);
     }//GEN-LAST:event_btnEliminar1MouseEntered
 
     private void btnEliminar1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseExited
-
+        pnlEliminar.setBackground(bg);
     }//GEN-LAST:event_btnEliminar1MouseExited
 
+    private void btnEliminar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseClicked
+        if(true){
+            controller.DeleteCita(txtCurp.getText().trim());
+        }
+    }//GEN-LAST:event_btnEliminar1MouseClicked
+    private boolean validarCurp() {
+        String texto = txtCurp.getText().trim();
+        if (texto != null) {
+            String regex = "^[A-Z]{1}[AEIOU]{1}[A-Z]{1}[A-Z]{1}\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])[HM]{1}[A-Z]{2}[A-Z0-9]{3}$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(texto);
+            if (matcher.matches()) {
+                JOptionPane.showMessageDialog(null, "El curp es incorrecto");
+                return false;
+            }
+            return matcher.matches();
+        } else {
+            JOptionPane.showMessageDialog(null, "LLenar el campo de curp");
+            return false;
+        }
+
+    }
+
+    private void Clear() {
+        txtCurp.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnEliminar;
     private javax.swing.JLabel btnEliminar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

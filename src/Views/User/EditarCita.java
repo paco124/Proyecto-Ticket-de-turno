@@ -426,13 +426,15 @@ public class EditarCita extends javax.swing.JPanel {
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         if(true){
             GetCita cita =controller.SelectCita(txtCurp.getText().trim());
-            txtNombre.setText(cita.getNombre());
+            if(cita != null){
+                txtNombre.setText(cita.getNombre());
             txtPaterno.setText(cita.getPaterno());
             txtMaterno.setText(cita.getMaterno());
             txtTelefono.setText(Integer.toString(cita.getTelefono()));
             txtNivel.setText(Integer.toString(cita.getNivel()));
             txtMunicipio.setText(cita.getMunicipio());
             txtAsunto.setText(cita.getAsunto());
+            }
         }
     }//GEN-LAST:event_btnBuscarMouseClicked
 

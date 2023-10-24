@@ -362,7 +362,7 @@ public class Agendar_Cita extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAgendarMouseClicked
     private boolean validarForm() {
-        if (validarCurp() && validarNombre() && validarPaterno() && validarMaterno()) {
+        if (validarNombre() && validarPaterno() && validarMaterno()) {
             if (validarTelefono() && validaNivel() && validarMunicipio() && validarAsunto()) {
                 return true;
             }
