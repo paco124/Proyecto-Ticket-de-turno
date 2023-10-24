@@ -2,9 +2,9 @@ package Models.User;
 public class MAgendar {
     private String curp,nombre, paterno, materno;
     private int telefono,nivel;
-    private String municipio,asunto;
+    private String municipio,asunto,fecha;
 
-    public MAgendar(String curp, String nombre, String paterno, String materno, int telefono, int nivel, String municipio, String asunto) {
+    public MAgendar(String curp, String nombre, String paterno, String materno, int telefono, int nivel, String municipio, String asunto, String fecha) {
         this.curp = curp;
         this.nombre = nombre;
         this.paterno = paterno;
@@ -13,6 +13,15 @@ public class MAgendar {
         this.nivel = nivel;
         this.municipio = municipio;
         this.asunto = asunto;
+        this.fecha =fecha;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getCurp() {

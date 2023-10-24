@@ -4,8 +4,8 @@ package Models.User;
 public class ModificarCita extends MAgendar{
     private String curp2;
 
-    public ModificarCita(String curp, String nombre, String paterno, String materno, int telefono, int nivel, String municipio, String asunto, String curp2) {
-        super(curp, nombre, paterno, materno, telefono, nivel, municipio, asunto);
+    public ModificarCita(String curp, String nombre, String paterno, String materno, int telefono, int nivel, String municipio, String asunto, String curp2,String fecha) {
+        super(curp, nombre, paterno, materno, telefono, nivel, municipio, asunto,fecha);
         this.curp2 = curp2;
     }
 

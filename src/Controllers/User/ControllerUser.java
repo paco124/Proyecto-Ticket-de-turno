@@ -18,7 +18,7 @@ public class ControllerUser {
     public void InsertCita(MAgendar agendar) {
         try {
             Connection conexion = ConnectionDataBase.getConnection();
-            String sql = "INSERT INTO CITAS (CURP, NOMBRE, PATERNO, MATERNO, TELEFONO, NIVEL, MUNICIPIO, ASUNTO,STATUS) VALUES (?, ?, ?, ?, ?, ?, ?, ?,'PENDIENTE')";
+            String sql = "INSERT INTO CITAS (CURP, NOMBRE, PATERNO, MATERNO, TELEFONO, NIVEL, MUNICIPIO, ASUNTO,STATUS,FECHA) VALUES (?, ?, ?, ?, ?, ?, ?, ?,'PENDIENTE',?)";
             PreparedStatement preparedStatement = conexion.prepareStatement(sql);
             preparedStatement.setString(1, agendar.getCurp());
             preparedStatement.setString(2, agendar.getNombre());
@@ -28,6 +28,7 @@ public class ControllerUser {
             preparedStatement.setInt(6, agendar.getNivel());
             preparedStatement.setString(7, agendar.getMunicipio());
             preparedStatement.setString(8, agendar.getAsunto());
+            preparedStatement.setString(9, agendar.getFecha());
 
             preparedStatement.execute();
             JOptionPane.showMessageDialog(null, "Cita Agendada");
@@ -39,7 +40,7 @@ public class ControllerUser {
     public void UpdateCita(ModificarCita agendar) {
         try {
             Connection conexion = ConnectionDataBase.getConnection();
-            String sql = "UPDATE CITAS SET CURP = ?, NOMBRE = ?, PATERNO = ?,MATERNO = ?, TELEFONO = ?, NIVEL = ?, MUNICIPIO =?, ASUNTO = ? WHERE CURP = ?";
+            String sql = "UPDATE CITAS SET CURP = ?, NOMBRE = ?, PATERNO = ?,MATERNO = ?, TELEFONO = ?, NIVEL = ?, MUNICIPIO =?, ASUNTO = ?, FECHA = ? WHERE CURP = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(sql);
             preparedStatement.setString(1, agendar.getCurp());
             preparedStatement.setString(2, agendar.getNombre());
@@ -49,7 +50,8 @@ public class ControllerUser {
             preparedStatement.setInt(6, agendar.getNivel());
             preparedStatement.setString(7, agendar.getMunicipio());
             preparedStatement.setString(8, agendar.getAsunto());
-            preparedStatement.setString(9, agendar.getCurp2());
+            preparedStatement.setString(9, agendar.getFecha());
+            preparedStatement.setString(10, agendar.getCurp2());
             preparedStatement.execute();
             JOptionPane.showMessageDialog(null, "Cita Actualizada");
         } catch (SQLException e) {
@@ -75,7 +77,7 @@ public class ControllerUser {
         try {
             Connection conexion = ConnectionDataBase.getConnection();
             String sql = "SELECT  CURP, NOMBRE, PATERNO, MATERNO, TELEFONO,"
-                    + " NIVEL, MUNICIPIO, ASUNTO, STATUS FROM citas WHERE CURP = ?";
+                    + " NIVEL, MUNICIPIO, ASUNTO, STATUS,FECHA FROM citas WHERE CURP = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(sql);
             preparedStatement.setString(1, curp);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -90,8 +92,9 @@ public class ControllerUser {
                 String municipio = resultSet.getString("MUNICIPIO");
                 String asunto = resultSet.getString("ASUNTO");
                 String status = resultSet.getString("STATUS");
+                String fecha = resultSet.getString("FECHA");
 
-                GetCita cita = new GetCita(curpr, nombre, paterno, materno, telefono, nivel, municipio, asunto, status);
+                GetCita cita = new GetCita(curpr, nombre, paterno, materno, telefono, nivel, municipio, asunto, status,fecha);
                 citaList.add(cita);
             }
             resultSet.close();
@@ -107,7 +110,7 @@ public class ControllerUser {
         GetCita cita = null;
         try {
             Connection conexion = ConnectionDataBase.getConnection();
-            String sql = "SELECT CURP, NOMBRE, PATERNO, MATERNO, TELEFONO, NIVEL, MUNICIPIO, ASUNTO, STATUS FROM citas WHERE CURP = ?";
+            String sql = "SELECT CURP, NOMBRE, PATERNO, MATERNO, TELEFONO, NIVEL, MUNICIPIO, ASUNTO, STATUS, FECHA FROM citas WHERE CURP = ?";
             PreparedStatement preparedStatement = conexion.prepareStatement(sql);
             preparedStatement.setString(1, curp);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -122,8 +125,9 @@ public class ControllerUser {
                 String municipio = resultSet.getString("MUNICIPIO");
                 String asunto = resultSet.getString("ASUNTO");
                 String status = resultSet.getString("STATUS");
+                String fecha = resultSet.getString("FECHA");
 
-                cita = new GetCita(curpr, nombre, paterno, materno, telefono, nivel, municipio, asunto, status);
+                cita = new GetCita(curpr, nombre, paterno, materno, telefono, nivel, municipio, asunto, status,fecha);
             } else {
                 cita = null;
             }

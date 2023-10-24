@@ -3,9 +3,9 @@ package Models.Login;
 public class GetCita {
     private String curp, nombre,paterno,materno;
     private int telefono,nivel;
-    private String municipio, asunto,status;
+    private String municipio, asunto,status, fecha;
 
-    public GetCita(String curp, String nombre, String paterno, String materno, int telefono, int nivel, String municipio, String asunto, String status) {
+    public GetCita(String curp, String nombre, String paterno, String materno, int telefono, int nivel, String municipio, String asunto, String status, String fecha) {
         this.curp = curp;
         this.nombre = nombre;
         this.paterno = paterno;
@@ -15,6 +15,15 @@ public class GetCita {
         this.municipio = municipio;
         this.asunto = asunto;
         this.status = status;
+        this.fecha = fecha;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getCurp() {
