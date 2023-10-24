@@ -138,7 +138,7 @@ public class Delete_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarMouseExited
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        if(validarCurp()){
+        if(true){
             controller.DeleteCita(txtCurp.getText().trim());
             Clear();
         }
@@ -146,7 +146,7 @@ public class Delete_Cita extends javax.swing.JPanel {
     private boolean validarCurp() {
         String texto = txtCurp.getText().trim();
         if (texto != null) {
-            String regex = "^[A-Z]{1}[AEIOU]{1}[A-Z]{1}[A-Z]{1}\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])[HM]{1}[A-Z]{2}[A-Z0-9]{3}$";
+            String regex = "^[A-Z]{4}\\d{2}\\d{2}[HM][A-Z]{5}\\d{2}$";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(texto);
             if(matcher.matches()){

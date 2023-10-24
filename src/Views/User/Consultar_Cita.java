@@ -149,14 +149,14 @@ public class Consultar_Cita extends javax.swing.JPanel {
     }//GEN-LAST:event_btnConsultarMouseExited
 
     private void btnConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarMouseClicked
-        if(validarCurp()){
+        if(true){
             controller.SelectCita(txtCurp.getText().trim());
         }
     }//GEN-LAST:event_btnConsultarMouseClicked
     private boolean validarCurp(){
         String texto = txtCurp.getText().trim();
         if (texto != null) {
-            String regex = "^[A-Z]{1}[AEIOU]{1}[A-Z]{1}[A-Z]{1}\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])[HM]{1}[A-Z]{2}[A-Z0-9]{3}$";
+            String regex = "^[A-Z]{4}\\d{2}\\d{2}[HM][A-Z]{5}\\d{2}$";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(texto);
             if(matcher.matches()){
