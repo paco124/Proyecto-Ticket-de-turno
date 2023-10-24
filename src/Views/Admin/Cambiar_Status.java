@@ -23,8 +23,6 @@ public class Cambiar_Status extends javax.swing.JPanel {
         txtCurp = new javax.swing.JTextField();
         pnlModificar = new javax.swing.JPanel();
         btnModificar = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
 
@@ -79,21 +77,6 @@ public class Cambiar_Status extends javax.swing.JPanel {
         );
 
         add(pnlModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, -1, -1));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 720, 390));
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
@@ -170,8 +153,6 @@ public class Cambiar_Status extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCurp;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlModificar;

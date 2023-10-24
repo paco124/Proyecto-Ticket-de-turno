@@ -19,8 +19,6 @@ public class Delete_Cita extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         lblCurp = new javax.swing.JLabel();
         txtCurp = new javax.swing.JTextField();
         lblTitulo = new javax.swing.JLabel();
@@ -29,21 +27,6 @@ public class Delete_Cita extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 210, 720, -1));
 
         lblCurp.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         lblCurp.setForeground(new java.awt.Color(2, 111, 136));
@@ -136,8 +119,6 @@ public class Delete_Cita extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnEliminar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCurp;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlEliminar;

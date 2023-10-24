@@ -21,7 +21,6 @@ public class Controller_Login {
             preparedStatement.setString(2, user.getUserName());
             preparedStatement.setInt(3, user.getRoleId());
             preparedStatement.setString(4, user.getPass());
-
             preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
